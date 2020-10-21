@@ -4,7 +4,7 @@
 > Wong Cheuk Kiu, Nadeem Areeb
  
 #### Description:
-This project is a **text-based horror game**, It draws inspiration from interactive novels and puzzle games where the character is trapped in an unsettling location. Each choice that the character makes and the time that the character used will determine the likelihood of survival from the Chucky the doll.
+This project is a **text-based horror game**, It draws inspiration from interactive novels and puzzle games where the player is trapped in an unsettling location. Each choice that the player makes and the time that the player used will determine the likelihood of survival from the Chucky the doll.
  
 #### Game Rules:
 Player is spawned in a map where they could make decisions on the path they want to go
