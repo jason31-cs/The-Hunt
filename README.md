@@ -23,7 +23,7 @@ In this random tree, random junctions and events would be implemented
 Variables will be used to store seed for construction of decision tree and the time the player has taken
 Array will be used to store player input (decisions) 
 3. Dynamic memory management
-      - 	After every user input, a function will be called which makes a new array with extra space that                    stores all the player inputs, allowing for dynamic memory allocation 
+      - 	After every user input, a function will be called which makes a new array with extra space that stores all the player inputs, allowing for dynamic memory allocation 
       -	This way, the progress of the player could be continuously tracked and stored without having an unnecessarily big array. 
 4. File input/output (e.g., for loading/saving game status)
 Progress and seed will be stored in a file (eg. slotA) 
