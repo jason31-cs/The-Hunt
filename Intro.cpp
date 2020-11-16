@@ -85,7 +85,7 @@ int chooseslot(){
   return 0;
 }
 
-
+// add difficulty()
 void newgame(){
   //This function is called when player chooses new game
   //calls for the function displaysave
@@ -174,8 +174,21 @@ bool new_or_load(){
 }
 
 void difficulty(){
-
-}
+  int width = 15;
+  char diff;
+  cout << "Choose the difficulty level: " << "Easy" << setw(width) << "Hard" << endl;
+  cout << "Please input E for or H for hard: ";
+  cin >> diff;
+  
+  while (diff != 'E' && diff != 'H') {
+    cout << "Wrong input. Please enter E for easy or H for hard: ";
+    cin >> diff;
+  }
+  
+  return diff;
+  //for both difficulties, health bar will remain the same
+  //for the hard option, a timer will be added
+ }
 
 void introduction (){
   string username;
