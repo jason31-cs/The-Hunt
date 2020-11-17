@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 bool checkforload(string filename){
   //this function checks whether slot is empty
@@ -12,7 +13,7 @@ bool checkforload(string filename){
 }
 
 struct file{
-  //fn = file name, display = "empty" / "not empty"
+  //fn = file name, display = "empty" / "filled"
   //exist: 1 = file exist, 0  file does not exist
   //checkexist() -> check if file exist thru function checkforload() and updates info
   //existdisplay() -> turns the bool of exist into displayable string
@@ -23,7 +24,7 @@ struct file{
     exist = checkforload(fn);
   }
   void existdisplay(){
-      if (exist) display = "not empty";
+      if (exist) display = "filled";
       else display = "empty";
   }
   void update(){
@@ -85,7 +86,7 @@ int chooseslot(){
   return 0;
 }
 
-// add difficulty()
+
 void newgame(){
   //This function is called when player chooses new game
   //calls for the function displaysave
@@ -101,7 +102,7 @@ void newgame(){
     slot = chooseslot();
     //prompt for confirmation if file already exisits
     if (files[slot].exist){
-      cout<< "File is occupied, Do you want to override? (Y/N)"<<endl;
+      cout<< "File is occupied, Do you want to overwrite? (Y/N)"<<endl;
       cin >> cont;
       while (cont != 'Y' && cont != 'N'){
         cout << "input \'Y\' for yes or  \'N\' for no" <<endl;
@@ -113,7 +114,7 @@ void newgame(){
 
   //overriding file if there are existing file, and open new file if there isnt any
 
-  cout<<"newfile"<<endl;
+  cout<<"new file created...."<<endl<<endl<<endl;
   ofstream newfile;
   newfile.open(files[slot].fn);
   newfile << "NEW"; // EDIT -------------------------------------
@@ -159,8 +160,6 @@ bool new_or_load(){
   if (empty) //no existing files
     return 1;
 
-
-
   cout<< "Do you want to start a new game or load from a save file"<<endl;
   cout<< "enter \'N\' for new game and \'L\' to load: " <<endl;
   cin >> input;
@@ -174,24 +173,47 @@ bool new_or_load(){
 }
 
 void difficulty(){
-  int width = 15;
   char diff;
-  cout << "Choose the difficulty level: " << "Easy" << setw(width) << "Hard" << endl;
-  cout << "Please input E for or H for hard: ";
+  cout << "Choose the difficulty level:"<< endl;
+  cout << "Please input \'E\' for easy or \'H\' for hard: ";
   cin >> diff;
-  
+
   while (diff != 'E' && diff != 'H') {
     cout << "Wrong input. Please enter E for easy or H for hard: ";
     cin >> diff;
   }
-  
-  return diff;
+
+  ofstream file;
+  file.open(filetoedit,ios::app);
+  file << "\n" << diff;
+  if (file.fail()) {
+  cout << "Error in file opening!"
+    << endl;
+    exit(1);
+ }
+  file.close();
+
   //for both difficulties, health bar will remain the same
   //for the hard option, a timer will be added
+}
+
+void username(){
+  string username;
+  cout << "Input your name (one word): ";
+  cin >> username;
+  ofstream file;
+  file.open(filetoedit,ios::app);
+  if (file.fail()) {
+  cout << "Error in file opening!"
+    << endl;
+    exit(1);
  }
+  file << username ;
+  file.close();
+
+}
 
 void introduction (){
-  string username;
   //add more details: lore, instructions ...
   cout<<"Hello there!!"<<endl;
   if (new_or_load()) {
@@ -202,6 +224,8 @@ void introduction (){
     cout<< "loading game..." <<endl;
     loadgame();
   }
+  username();
+  difficulty();
 
 
 }
@@ -209,6 +233,7 @@ void introduction (){
 //main to check code
 int main(){
   introduction();
+
   cout<< filetoedit;
 
 }
