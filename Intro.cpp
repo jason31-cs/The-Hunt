@@ -227,6 +227,8 @@ void introduction (){
   }
   username();
   difficulty();
-
-
+  ofstream file;
+  file.open("currentfile.txt");
+  file<<filetoedit;
+  file.close();
 }

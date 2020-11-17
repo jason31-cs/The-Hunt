@@ -1,4 +1,4 @@
-//Makefile
+#Makefile
 Tags= -pedantic-errors -std=c++11
 
 Intro.o: Intro.cpp Intro.h
@@ -7,10 +7,10 @@ Intro.o: Intro.cpp Intro.h
 main.cpp: main.cpp Intro.h
 	g++ $(Tags) -c $<
 
-The_Hunt: main.o Intro.o
-	g++ $(Tags) $^ -o The_Hunt
+Hunt: main.o Intro.o
+	g++ $(Tags) $^ -o Hunt
 
 clean:
-		rm -f main.o Intro.o main *.txt
+		rm -f main.o Intro.o Hunt *.txt
 
 .PHOONY: clean
