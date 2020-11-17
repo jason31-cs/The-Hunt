@@ -1,7 +1,9 @@
+//Intro.cpp
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <sstream>
+#include "Intro.h"
 using namespace std;
 bool checkforload(string filename){
   //this function checks whether slot is empty
@@ -117,7 +119,6 @@ void newgame(){
   cout<<"new file created...."<<endl<<endl<<endl;
   ofstream newfile;
   newfile.open(files[slot].fn);
-  newfile << "NEW"; // EDIT -------------------------------------
   newfile.close();
 
   filetoedit = files[slot].fn; //set chosen slot as file to edit
@@ -227,13 +228,5 @@ void introduction (){
   username();
   difficulty();
 
-
-}
-
-//main to check code
-int main(){
-  introduction();
-
-  cout<< filetoedit;
 
 }
