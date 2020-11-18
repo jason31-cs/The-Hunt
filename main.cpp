@@ -13,6 +13,9 @@ string editingfile, username;
 char diff;
 int health,seed;
 
+int stage,choice,c_health,done;
+bool b_done;
+
 struct Game_progress {
   bool b_done;
   int done;
@@ -21,9 +24,7 @@ struct Game_progress {
   int c_health;
 };
 
-void update_progress(Game_progress * &progress, int &size, int stage, int choice,
-  int c_health ,bool b_done, int done)
-{
+void update_progress(Game_progress * &progress, int &size, int stage, int choice,int c_health ,bool b_done, int done){
 	Game_progress * temp = new Game_progress[size + 1];
 	for (int i = 0; i < size; i++)
 	{
@@ -43,9 +44,9 @@ void update_progress(Game_progress * &progress, int &size, int stage, int choice
 
 
 void initialize(){
+  //Look at save file and edit progress values 
   string input,extra;
-  int stage,choice,c_health,done;
-  bool b_done;
+
   int size = 0;
   Game_progress * progress = new Game_progress[size];
 
