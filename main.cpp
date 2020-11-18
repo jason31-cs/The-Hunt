@@ -10,13 +10,18 @@ using namespace std;
 //global constants
 string editingfile, username;
 char diff;
-int health;
-double seed;
+int health,seed;
 
 
 
+void setgame(){
+  srand(seed);
 
-int main(){
+
+
+}
+
+void initialize(){
   string heart = "♥";
   for (int i = 0; i < 20 ; i++)
     cout<<endl;
@@ -41,6 +46,11 @@ int main(){
   for(int i = 0 ; i < health ; i++)
     cout<<heart;
   cout<<endl;
+
+}
+
+int main(){
+  initialize();
 
 
 }
