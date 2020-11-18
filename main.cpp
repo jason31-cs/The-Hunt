@@ -5,35 +5,8 @@
 #include <fstream>
 #include <cstdlib>
 #include "Intro.h"
+#include "junction.h"
 using namespace std;
-
-struct Game_progress {
-  char junction;
-  int num_games;
-};
-
-void update_progress(Game_progress *&progress, int &n, int new_size, char inp) {
-  
-  Game_progress* temp = new Game_progress[new_size];
-
- for (int i = 0; i < n; i++) {
-   temp[i].junction = progress[i].junction;
-   temp[i].num_games = progress[i].num_games;
-}
-
- 
-for (int i = n; i < new_size;i++) {
-  temp[i].junction = inp;
-}
-
-progress = new Game_progress[new_size];
-
-
-n = new_size;
-
-}
-
-
 
 //global constants
 string editingfile, username;
@@ -43,9 +16,8 @@ int health,seed;
 
 
 void setgame(){
+  //sets seed
   srand(seed);
-
-
 
 }
 
