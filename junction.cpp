@@ -13,14 +13,53 @@ int c_junction(int num,int stage){
   switch(stage)
   {
     case 1:
+    switch(num){
+      case 1:
 
+      break;
+
+      case 2;
+
+      break;
+
+      case 3;
+
+      break;
+    }
     break;
 
     case 2;
+    switch(num){
+      case 1:
+
+      break;
+
+      case 2;
+
+      break;
+
+      case 3;
+
+      break;
+    }
 
     break;
 
     case 3;
+
+    switch(num){
+      case 1:
+
+      break;
+
+      case 2;
+
+      break;
+
+      case 3;
+
+      break;
+    }
 
     break;
   }

@@ -13,6 +13,32 @@ string editingfile, username;
 char diff;
 int health,seed;
 
+struct Game_progress {
+  char junction;
+  int num_games;
+};
+
+void update_progress(Game_progress *&progress, int &n, int new_size, char inp) {
+
+  Game_progress* temp = new Game_progress[new_size];
+
+ for (int i = 0; i < n; i++) {
+   temp[i].junction = progress[i].junction;
+   temp[i].num_games = progress[i].num_games;
+}
+
+
+for (int i = n; i < new_size;i++) {
+  temp[i].junction = inp;
+}
+
+progress = new Game_progress[new_size];
+
+
+n = new_size;
+
+  delete [] temp;
+}
 
 
 void setgame(){
@@ -52,5 +78,6 @@ void initialize(){
 int main(){
   initialize();
 
-
+  int n = 0;
+  Game_progress * progress = new Game_progress[n];
 }
