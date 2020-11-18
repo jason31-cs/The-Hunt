@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 #include "Intro.h"
 using namespace std;
 bool checkforload(string filename){
@@ -88,6 +89,57 @@ int chooseslot(){
   return 0;
 }
 
+void difficulty(){
+  //allows user to chose difficulty
+  //Difficulty is then written in save files
+  //health status is also created
+  char diff;
+  cout << "Choose the difficulty level, on Hard mode, \nyour wits would be tested against a timer"<< endl;
+  cout << "Please input \'E\' for easy or \'H\' for hard: ";
+  cin >> diff;
+
+  while (diff != 'E' && diff != 'H') {
+    cout << "Wrong input. Please enter E for easy or H for hard: ";
+    cin >> diff;
+  }
+
+  ofstream file;
+  file.open(filetoedit,ios::app);
+  file << "\n" << diff<<endl; //append difficulty to save file
+
+  file << 3 <<endl; // append health status to save file
+  if (file.fail()) {
+  cout << "Error in file opening!"
+    << endl;
+    exit(1);
+ }
+  file.close();
+
+  //for both difficulties, health bar will remain the same
+  //for the hard option, a timer will be added
+}
+
+void username(){
+  string username;
+  cout << "Input your name (one word): ";
+  cin >> username;
+  while (username.length()>11) {
+    cout<< "username max length = 10, input username again"<<endl;
+    cin>>username;
+  }
+
+
+  ofstream file;
+  file.open(filetoedit,ios::app);
+  if (file.fail()) {
+  cout << "Error in file opening!"
+    << endl;
+    exit(1);
+ }
+  file << username ;
+  file.close();
+}
+
 
 void newgame(){
   //This function is called when player chooses new game
@@ -119,9 +171,11 @@ void newgame(){
   cout<<"new file created...."<<endl<<endl<<endl;
   ofstream newfile;
   newfile.open(files[slot].fn);
+  newfile << time(NULL)<<"\n";
   newfile.close();
-
   filetoedit = files[slot].fn; //set chosen slot as file to edit
+  username();
+  difficulty();
 }
 
 void loadgame(){
@@ -154,12 +208,14 @@ bool new_or_load(){
   char input;
   bool empty = 1;
   initfiles();
-
+  cout<< "new or load"<<endl; // delete
   for (int i = 0 ; i < numfiles ; i++) {
     if (files[i].exist) empty = 0; //checks if there is a file that exist
   }
-  if (empty) //no existing files
+  if (empty) { //no existing files
+    cout<<"No existing files"<<endl;
     return 1;
+  }
 
   cout<< "Do you want to start a new game or load from a save file"<<endl;
   cout<< "enter \'N\' for new game and \'L\' to load: " <<endl;
@@ -173,50 +229,19 @@ bool new_or_load(){
 
 }
 
-void difficulty(){
-  char diff;
-  cout << "Choose the difficulty level:"<< endl;
-  cout << "Please input \'E\' for easy or \'H\' for hard: ";
-  cin >> diff;
-
-  while (diff != 'E' && diff != 'H') {
-    cout << "Wrong input. Please enter E for easy or H for hard: ";
-    cin >> diff;
-  }
-
-  ofstream file;
-  file.open(filetoedit,ios::app);
-  file << "\n" << diff;
-  if (file.fail()) {
-  cout << "Error in file opening!"
-    << endl;
-    exit(1);
- }
-  file.close();
-
-  //for both difficulties, health bar will remain the same
-  //for the hard option, a timer will be added
-}
-
-void username(){
-  string username;
-  cout << "Input your name (one word): ";
-  cin >> username;
-  ofstream file;
-  file.open(filetoedit,ios::app);
-  if (file.fail()) {
-  cout << "Error in file opening!"
-    << endl;
-    exit(1);
- }
-  file << username ;
-  file.close();
-
-}
-
 void introduction (){
-  //add more details: lore, instructions ...
-  cout<<"Hello there!!"<<endl;
+  cout<<"=================================================================\n\n";
+  cout<<"████████╗██╗  ██╗███████╗    ██╗  ██╗██╗   ██╗███╗   ██╗████████╗"<<endl;
+  cout<<"╚══██╔══╝██║  ██║██╔════╝    ██║  ██║██║   ██║████╗  ██║╚══██╔══╝"<<endl;
+  cout<<"   ██║   ███████║█████╗      ███████║██║   ██║██╔██╗ ██║   ██║   "<<endl;
+  cout<<"   ██║   ██╔══██║██╔══╝      ██╔══██║██║   ██║██║╚██╗██║   ██║   "<<endl;
+  cout<<"   ██║   ██║  ██║███████╗    ██║  ██║╚██████╔╝██║ ╚████║   ██║   "<<endl;
+  cout<<"   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   "<<endl;
+  cout<<"                                                                 "<<endl;
+  cout<<"\n\n=================================================================\n\n";
+  cout<<"welcome player\n";
+  cout<<"this is a text-based horror game, \nevery choice that you make would determine your survival.\n\n";
+
   if (new_or_load()) {
     cout<< "starting new game..." <<endl;
     newgame();
@@ -225,8 +250,6 @@ void introduction (){
     cout<< "loading game..." <<endl;
     loadgame();
   }
-  username();
-  difficulty();
   ofstream file;
   file.open("currentfile.txt");
   file<<filetoedit;
