@@ -1,2 +1,28 @@
+//junction.cpp
 #include <iostream>
+#include "junction.h"
 using namespace std;
+
+
+
+
+
+int c_junction(int num,int stage){
+  srand(seed);
+
+  switch(stage)
+  {
+    case 1:
+
+    break;
+
+    case 2;
+
+    break;
+
+    case 3;
+
+    break;
+  }
+
+}
