@@ -31,6 +31,7 @@ progress = new Game_progress[new_size];
 
 n = new_size;
 
+  delete [] temp;
 }
 
 
@@ -80,5 +81,6 @@ void initialize(){
 int main(){
   initialize();
 
-
+  int n = 0;
+  Game_progress * progress = new Game_progress[n];
 }
