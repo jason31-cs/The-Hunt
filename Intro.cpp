@@ -53,6 +53,12 @@ void initfiles(){
 
 }
 
+void appendfile(string content,string filename){
+  ofstream fout;
+  fout.open(filename,ios::app);
+  fout<<content<<endl;
+  fout.close();
+}
 
 void displaysave(){
   //looks at existing files
@@ -89,12 +95,12 @@ int chooseslot(){
   return 0;
 }
 
-void difficulty(){
+char difficulty(){
   //allows user to chose difficulty
   //Difficulty is then written in save files
   //health status is also created
   char diff;
-  cout << "Choose the difficulty level, on Hard mode, \nyour wits would be tested against a timer"<< endl;
+  cout << "Choose the difficulty level, \nOn Hard mode, you would have 3 healths \nOn easy mode, you would have 5 healths"<< endl;
   cout << "Please input \'E\' for easy or \'H\' for hard: ";
   cin >> diff;
 
@@ -106,15 +112,13 @@ void difficulty(){
   ofstream file;
   file.open(filetoedit,ios::app);
   file << "\n" << diff<<endl; //append difficulty to save file
-
-  file << 3 <<endl; // append health status to save file
   if (file.fail()) {
   cout << "Error in file opening!"
     << endl;
     exit(1);
  }
   file.close();
-
+  return diff;
   //for both difficulties, health bar will remain the same
   //for the hard option, a timer will be added
 }
@@ -139,7 +143,6 @@ void username(){
   file << username ;
   file.close();
 }
-
 
 void newgame(){
   //This function is called when player chooses new game
@@ -175,7 +178,17 @@ void newgame(){
   newfile.close();
   filetoedit = files[slot].fn; //set chosen slot as file to edit
   username();
-  difficulty();
+  char diff = difficulty();
+  switch (diff){
+    case 'E':
+      appendfile("0 0 5 0 0",filetoedit);
+      break;
+    case 'H':
+      appendfile("0 0 3 0 0",filetoedit);
+      break;
+    default:
+      cout<< "ERROR: No difficulty selected "<<endl;
+  }
 }
 
 void loadgame(){
@@ -240,7 +253,8 @@ void introduction (){
   cout<<"                                                                 "<<endl;
   cout<<"\n\n=================================================================\n\n";
   cout<<"welcome player\n";
-  cout<<"this is a text-based horror game, \nevery choice that you make would determine your survival.\n\n";
+  cout<<"this is a text-based horror game,"<<endl;
+  cout<<"\033[4mevery\033[0m choice that you make would determine the likelihood of your survival.\n\n";
 
   if (new_or_load()) {
     cout<< "starting new game..." <<endl;
