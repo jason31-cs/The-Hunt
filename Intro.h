@@ -1,5 +1,5 @@
 //Intro.h
-#ifndef b_H
-#define b_H
+#ifndef Intro_H
+#define Intro_H
 void introduction ();
 #endif
