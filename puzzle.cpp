@@ -1,7 +1,11 @@
 //puzzle.cpp
 #include <iostream>
+#include <ctime>
 #include "puzzle.h"
 using namespace std;
+
+
+
 
 bool puzzle_collection(int stage, int num){
   bool pass = 1;
