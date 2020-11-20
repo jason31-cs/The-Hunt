@@ -346,7 +346,23 @@ int main(){
   int stage2[no_stage2puzzles]={1,2,3,4}; // 4 games in stage 2 of the hunt
 
   initialize();
-  while (c_health >  0 && stage < 4) { // not dead and havent finished game
+
+  // Show results , finished game
+  if (stage == 4){
+    cout<<endl<< "You have already completed the game in this file ";
+    switch(diff){
+      case 'E':
+      cout<<"at easy difficulty. Try the game again in Hard mode."<<endl;
+      break;
+      case'H':
+      cout<<"at Hard difficulty. Congrats!"<<endl;
+      break;
+      default:
+      cout<< "diff error";
+    }
+  }
+
+  while (c_health >  0 && stage < 4) { // not dead
     srand(seed); // set seed
 
     // stage 0 + junction 1
@@ -486,22 +502,10 @@ int main(){
           cout<<"   ██║   ██╔══██║██╔══╝      ██╔══╝  ██║╚██╗██║██║  ██║"<<endl;
           cout<<"   ██║   ██║  ██║███████╗    ███████╗██║ ╚████║██████╔╝"<<endl;
           cout<<"   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝╚═════╝ "<<endl;
-          
       }
+    }
 
     }
 
-    // Show results , finished game
-    else if (stage > 3){
 
-    }
   }
-
-
-
-
-
-
-
-
-}
