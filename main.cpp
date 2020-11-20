@@ -14,19 +14,18 @@ string editingfile, username;
 char diff;
 const int HEADERSIZE = 3;
 int seed;
-int stage, choice,c_health,done,prog_size = 0;
-bool b_done;
-
+int stage, choice,c_health,prog_size = 0;
+bool a_done, b_done;
 
 struct Game_progress {
-  bool b_done;
-  int done;
+  bool a_done;
+  int b_done;
   int stage;
   int choice;
   int c_health;
 };
 
-void update_progress(Game_progress * &progress, int &size, int stage, int choice,int c_health ,bool b_done, int done){
+void update_progress(Game_progress * &progress, int &size, int stage, int choice,int c_health ,bool a_done, int b_done){
 	Game_progress * temp = new Game_progress[size + 1];
 	for (int i = 0; i < size; i++)
 	{
@@ -38,8 +37,8 @@ void update_progress(Game_progress * &progress, int &size, int stage, int choice
   progress[size].stage = stage;
   progress[size].choice = choice;
   progress[size].c_health = c_health;
+  progress[size].a_done = a_done;
   progress[size].b_done = b_done;
-  progress[size].done = done;
 	size ++;
 	return;
 }
@@ -74,12 +73,12 @@ void initialize(){
     sin >> stage;
     sin >> choice;
     sin >> c_health;
+    sin >> a_done;
     sin >> b_done;
-    sin >> done;
     while(sin>>extra){
       cout<<"extra"<<extra;
     }
-    update_progress(progress,prog_size,stage,choice,c_health,b_done,done);
+    update_progress(progress,prog_size,stage,choice,c_health,a_done,b_done);
   }
   fin.close();
 
@@ -94,8 +93,8 @@ void initialize(){
     cout<< "stage " << progress[i].stage;
     cout<< " choice " << progress[i].choice;
     cout<< " health " << progress[i].c_health;
-    cout<< " b_done " << progress[i].b_done;
-    cout << " done " << progress[i].done;
+    cout<< " a_done " << progress[i].a_done;
+    cout << " b_done " << progress[i].b_done;
     cout <<endl;
   }
 
@@ -108,10 +107,10 @@ void mainappendfile(string content,string filename){
   fout.close();
 }
 
-void update_save(int stage, int choice,int c_health ,bool b_done, int done){
+void update_save(int stage, int choice,int c_health ,bool a_done, int b_done){
   //updates savefile
   ostringstream status (ostringstream::ate);
-  status << stage << " " << choice << " "<< c_health << " "<< b_done << " "<<done<<endl;
+  status << stage << " " << choice << " "<< c_health << " "<< a_done << " "<<b_done;
   string content = status.str();
   mainappendfile(content, editingfile);
 
@@ -165,6 +164,20 @@ void display_health(int health){
   cout<<endl<<"++++++++++++++++++++++++++++++++++++++++++++++++++++++"<<endl;
 }
 
+void running_puzzles(int Stage, int num, int c_health){
+  bool pass = 0;
+  while (c_health > 0 && !pass){
+    pass = puzzle_collection(Stage, num);
+    if (!pass){
+      c_health--;
+      display_health(c_health);
+    }
+  }
+  if (c_health == 0){
+    gameover();
+  }
+}
+
 int junction1(){
   //-1 if gameover, 0 for choice 1 and 1 for choice 2
   string userin;
@@ -215,7 +228,6 @@ int junction1(){
       cout<<"======================================================"<<endl;
       cout<<""<<endl;
       cout<<"You can either choose the vent \'V\' or the door \'D\'. "<<endl;
-      userin = ""; //reset userin
       failed = 0; //passed
       string ans2[2] = {"V","D"};
       inputcheck(userin,ans2,2);
@@ -248,24 +260,243 @@ int junction1(){
 
 }
 
+int junction2(){
+  //-1 if gameover, 0 for choice R and 1 for choice L
+  string userin;
+  bool failed = 1;
+  // junction 2
+  while(c_health > 0 && failed){
+    cout<<""<<endl;
+    cout<<"You reached the end of the corridor, you can hear the thuds of the footsteps that"<<endl;
+    cout<<"you have heard earlier. You know that whatever it is, it is hunting for you. Following"<<endl;
+    cout<<"the tracks that you have left. "<<endl;
+    cout<<""<<endl;
+    cout<<"To your right there is a staircase that circles downwards into the darkness. To your"<<endl;
+    cout<<"left there is an old looking elevator that does not seem to have been maintained for years."<<endl;
+    cout<<"But you remember the saying that until you faced your demons head on, nothing"<<endl;
+    cout<<"good will come out of your life. "<<endl;
+    cout<<""<<endl;
+    cout<<"======================================================"<<endl;
+    cout<<""<<endl;
+    cout<<"You can either choose to go right \'R\', left \'L\' or turn around and face your demon \'stay\'"<<endl;
+
+    string ans1[3]={"R","L","stay"};
+    inputcheck(userin,ans1,3);
+    //if user stays
+    if (userin == "stay"){
+      cout<<""<<endl;
+      cout<<"You puffed up your chest, put yourself into a battle stance like position that"<<endl;
+      cout<<"you have recalled from an action movie. The loud thuds grow stronger and stronger."<<endl;
+      cout<<"In the distance, you could see a dark shadowy figure crawling from the corridor that you"<<endl;
+      cout<<"just came from. It popped his head out of the side, seemingly recognised you. The dark"<<endl;
+      cout<<"figure dashed towards you. It was at this moment that you realised you have made the"<<endl;
+      cout<<"wrong decision. This is not a demon you can face. "<<endl;
+      cout<<"You have lost a health."<<endl;
+      c_health -= 1;
+      display_health(c_health);
+    }
+    //taking the stairs
+    else if (userin == "R"){
+      cout<<""<<endl;
+      cout<<"You raced towards the stairs, thinking it would be a safe choice, you tumbled down the"<<endl;
+      cout<<"staircase for what seemed like an eternity until you reached the end of the stairs."<<endl;
+      cout<<"Although you sustained severe injuries, you might have gained a lead on the "<<endl;
+      cout<<"creature. "<<endl;
+      cout<<""<<endl;
+      cout<<"Your health decreased by one"<<endl;
+      c_health -=1;
+      display_health(c_health);
+      cout<<""<<endl;
+      cout<<"You stood up with the last of your might and see… "<<endl;
+      failed = 0; //passed
+      return 0;
+    }
+    //taking the elevator
+    else if (userin == "L"){
+      cout<<""<<endl;
+      cout<<"You pressed the down button on the wall next to the elevator. To your surprise,"<<endl;
+      cout<<"the elevator door opened up smoothly. You went in and found that there was"<<endl;
+      cout<<"only one button on the control panel. \'G\' You pressed it and the elevator door closed."<<endl;
+      cout<<""<<endl;
+      cout<<"As you feel that the elevator is slowly descending, a soothing lobby music starts"<<endl;
+      cout<<"playing in the background. You became more calm and collected. "<<endl;
+      cout<<""<<endl;
+      cout<<"Your health increased by one"<<endl;
+      c_health ++;
+      display_health(c_health);
+      cout<<""<<endl;
+      cout<<"After what seems like an eternity, the elevator door opened, and you see…"<<endl;
+      failed = 0; //passed
+      return 1;
+    }
+  }
+  //gameover sequence
+  if (c_health == 0){
+    gameover();
+    return -1;
+  }
+  return -1;
+}
+
 int main(){
-  int userchoice, choice_1, choice_2;
+  int userchoice,choice0,choice1,game_a,game_b;
+  const int no_stage1puzzles = 4;
+  const int no_stage2puzzles = 4;
+  int stage1[no_stage1puzzles]={1,2,3,4}; // 4 games in stage 1 of the hunt
+  int stage2[no_stage2puzzles]={1,2,3,4}; // 4 games in stage 2 of the hunt
 
   initialize();
   while (c_health >  0 && stage < 4) { // not dead and havent finished game
-    srand(seed); // randomize number
-    choice_1 = rand();
-    choice_2 = rand();
+    srand(seed); // set seed
+
+    // stage 0 + junction 1
     if (stage == 0){
         userchoice = junction1();
         choice = userchoice;
         stage++;
+        a_done = 0;
         b_done = 0;
-        done = 0;
-        update_save(stage,choice,c_health,b_done,done);
+        update_save(stage,choice,c_health,a_done,b_done); //save game
     }
 
+    // stage 1 + junction 2
+    else if (stage == 1){
+      choice0 = rand()%no_stage1puzzles;
+      choice1 = rand()%no_stage1puzzles;
+      if (b_done == 0){
+        switch (choice){
+          case 0: //choice vent
+          //set game a and game b  from choice
+
+          game_a = stage1[choice0];
+          stage1[choice0] = 0;
+          game_b = stage1[rand()%no_stage1puzzles];
+          while(game_b == 0)
+            game_b = stage1[rand()%no_stage1puzzles]; //makes sure game is not replicated
+
+          if(!a_done) // check if game a is complete
+          running_puzzles(stage,game_a,c_health); //game a
+
+          if (c_health > 0){ // check if player died in game a
+            a_done = 1;
+            update_save(stage,choice,c_health,a_done,b_done); // save game
+            running_puzzles(stage,game_b,c_health); //game b
+          }
+          break;
+
+          case 1: //choice door
+          game_a = stage1[choice1];
+          stage1[choice1] = 0;
+          game_b = stage1[rand()%no_stage1puzzles];
+          while(game_b == 0)
+            game_b = stage1[rand()%no_stage1puzzles]; // makes sure game is not replicated
+
+            if(!a_done) // check if game a is complete
+            running_puzzles(stage,game_a,c_health); //game a
+
+            if (c_health > 0){ // check if player died in game a
+              a_done = 1;
+              update_save(stage,choice,c_health,a_done,b_done); // save game
+              running_puzzles(stage,game_b,c_health); //game b
+            }
+          break;
+        }
+      }
+      if (c_health > 0){
+        b_done = 1;
+        update_save(stage,choice,c_health,a_done,b_done); //save game
+        stage++; // increase stage by 1, stage == 2
+        a_done = 0;
+        b_done = 0;
+        userchoice = junction2();
+        choice = userchoice;
+        update_save(stage,choice,c_health,a_done,b_done); //save game
+      }
+    }
+
+    //stage 2
+    else if (stage == 2){
+      choice0 = rand()%no_stage2puzzles;
+      choice1 = rand()%no_stage2puzzles;
+      switch (choice){
+        case 0: //choice right (stairs)
+        //set game a and game b  from choice
+        game_a = stage2[choice0];
+        stage2[choice0] = 0;
+        game_b = stage1[rand()%no_stage2puzzles];
+        while(game_b == 0)
+          game_b = stage2[rand()%no_stage2puzzles]; //makes sure game is not replicated
+
+        if(!a_done) // check if game a is complete
+        running_puzzles(stage,game_a,c_health); //game a
+
+        if (c_health > 0){ // check if player died in game a
+          a_done = 1;
+          update_save(stage,choice,c_health,a_done,b_done); // save game
+          running_puzzles(stage,game_b,c_health); //game b
+        }
+        break;
+
+        case 1: //choice left (elevator)
+        game_a = stage2[choice1];
+        stage2[choice1] = 0;
+        game_b = stage2[rand()%no_stage2puzzles];
+        while(game_b == 0)
+          game_b = stage2[rand()%no_stage2puzzles]; // makes sure game is not replicated
+
+          if(!a_done) // check if game a is complete
+          running_puzzles(stage,game_a,c_health); //game a
+
+          if (c_health > 0){ // check if player died in game a
+            a_done = 1;
+            update_save(stage,choice,c_health,a_done,b_done); // save game
+            running_puzzles(stage,game_b,c_health); //game b
+          }
+        break;
+      }
+
+      b_done = 1;
+      update_save(stage,choice,c_health,a_done,b_done);
+      b_done = 0;
+      a_done = 0;
+      stage++;
+      update_save(stage,choice,c_health,a_done,b_done);
+
+    }
+
+    //stage 3 (ending)
+    else if (stage ==3){
+      cout<<""<<endl;
+      cout<<"The exit of the hospital! It is right in front of you!!! It is so close, that you could almost "<<endl;
+      cout<<"reach it."<<endl;
+      running_puzzles(stage,1,c_health);
+      if(c_health > 0){
+          stage++;
+          cout<<""<<endl;
+          cout<<"The entrance opened, you ran outside immediately. Once you were outside"<<endl;
+          cout<<"and looked back at the nightmare that you just escaped from, you see unordinary "<<endl;
+          cout<<"except for an abandon hospital, nothing seems to be chasing you to the outside. "<<endl;
+          cout<<""<<endl;
+          cout<<"You have no idea how you got there in the first place, but intuition tells you to not "<<endl;
+          cout<<"think about it ever again. "<<endl;
+          update_save(stage,choice,c_health,a_done,b_done);
+          cout<<"████████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗ "<<endl;
+          cout<<"╚══██╔══╝██║  ██║██╔════╝    ██╔════╝████╗  ██║██╔══██╗"<<endl;
+          cout<<"   ██║   ███████║█████╗      █████╗  ██╔██╗ ██║██║  ██║"<<endl;
+          cout<<"   ██║   ██╔══██║██╔══╝      ██╔══╝  ██║╚██╗██║██║  ██║"<<endl;
+          cout<<"   ██║   ██║  ██║███████╗    ███████╗██║ ╚████║██████╔╝"<<endl;
+          cout<<"   ╚═╝   ╚═╝  ╚═╝╚══════╝    ╚══════╝╚═╝  ╚═══╝╚═════╝ "<<endl;
+          
+      }
+
+    }
+
+    // Show results , finished game
+    else if (stage > 3){
+
+    }
   }
+
 
 
 
