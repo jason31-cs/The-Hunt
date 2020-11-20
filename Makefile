@@ -4,6 +4,7 @@ Tags= -pedantic-errors -std=c++11
 Intro.o: Intro.cpp Intro.h
 	g++ $(Tags) -c $<
 
+
 puzzle.o: puzzle.cpp puzzle.h
 		g++ $(Tags) -c $<
 
