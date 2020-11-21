@@ -224,7 +224,7 @@ bool s2g1(){
 }
 
 //Cricket game (stage 2)
-bool Game_cricket () {
+bool s2g2 () {
   //exit guarded by cricket player
   //you have to win to escape
   //prompt user for toss
@@ -256,9 +256,9 @@ bool Game_cricket () {
   }
 
   int comp_toss;
-  
+
   comp_toss = (rand() % 2)+1;
-  
+
   char coin_flip;
 
   if (comp_toss == 1) {
@@ -272,7 +272,7 @@ bool Game_cricket () {
 
   if (coin_flip == user_toss ) {
     cout << "The coin shows " << user_toss << ". ";
-    cout << "You win the toss. Would you like to bat or bowl first? Please enter your choice (Bat/Bowl): "; 
+    cout << "You win the toss. Would you like to bat or bowl first? Please enter your choice (Bat/Bowl): ";
 
     cin >> bat_or_bowl;
 
@@ -299,11 +299,11 @@ bool Game_cricket () {
   int runs_per_ball; // runs made per bowl by user/comp
   int comp_ball; // comp's bowling score
   int comp_score = 0; // total runs made by comp
-  int user_ball; 
+  int user_ball;
 
   if (bat_or_bowl == "Bat") {
     cout << "Please get prepared to start batting. He is gearing up for the first ball. Please input your score: ";
-    
+
     comp_ball = (rand()%6) + 1;
     cin >> runs_per_ball;
 
@@ -311,12 +311,12 @@ bool Game_cricket () {
       cout << "Please enter a number in the range 1-6: "<<endl;
       cin >> runs_per_ball;
     }
-    
+
 
      while (user_score < 50 && runs_per_ball != comp_ball) {
-       
+
        cout << "Good shot! ";
-       
+
        user_score += runs_per_ball;
        cout << "Total score: " << user_score << endl;
 
@@ -332,17 +332,17 @@ bool Game_cricket () {
        }
 
        comp_ball = (rand()%6)+1;
-       
+
      }
 
      if (user_score >= 50) {
        cout << "You have secured a half-century with a score of " << user_score << ". Congratulations, you win!";
 
        return 1;
-     
+
      }
 
-  
+
 
      else if ( runs_per_ball == comp_ball ) {
        cout << "You got out. It's your turn to bowl now. You have to stop him from beating your score of " << user_score << ". " << " It's your first bowl. Please input your bowling score: ";
@@ -353,7 +353,7 @@ bool Game_cricket () {
          cin >> user_ball;
        }
        runs_per_ball = (rand()%6)+1;
-       
+
 
        if (user_ball == runs_per_ball) {
          if (user_score == comp_score) {
@@ -379,17 +379,17 @@ bool Game_cricket () {
        while (comp_score <= user_score && user_ball !=   runs_per_ball) {
          cout << "Not out. He scored " << runs_per_ball << endl;
 
-         
+
          cout << "Opponent's total score: " << comp_score << endl;
 
          cout << "Please input next bowl's score: ";
-         
+
          cin >> user_ball;
          while (user_ball < 1 || user_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> user_ball;
          }
-         
+
          runs_per_ball = (rand()%6) +1;
 
          if (comp_score == user_score && user_ball == runs_per_ball) {
@@ -403,25 +403,25 @@ bool Game_cricket () {
          return 1;
        }
 
-       
+
 
          comp_score += runs_per_ball;
 
          if (comp_score  > user_score) {
          cout << "Opponent scored " << comp_score << ". " << "He beat your score. You lose :(" << endl;
-         
+
          return 0;
        }
 
      }
 
-     }   
-       
-  }     
+     }
+
+  }
 
   else if (bat_or_bowl == "Bowl") {
     cout << "Please get prepared to start bowling. Please input your score on the first ball: ";
-    
+
     cin >> user_ball;
     while (user_ball < 1 || user_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
@@ -435,14 +435,14 @@ bool Game_cricket () {
       cout << "Good swing! He's out on the first ball. It's your turn to bat now and beat his target of 0" << endl;
       comp_score = 0;
     }
-    
-  
+
+
      while (comp_score < 50 && runs_per_ball != user_ball) {
 
-       
-       
+
+
        cout << "Not out. He scored " << runs_per_ball << ". Computer's Total score: " << comp_score << endl;
-       
+
        cout << "Please enter your score for the next ball: ";
 
        cin >> user_ball;
@@ -450,24 +450,24 @@ bool Game_cricket () {
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> user_ball;
        }
-       runs_per_ball = (rand()%6) + 1; 
+       runs_per_ball = (rand()%6) + 1;
 
        if ( runs_per_ball == user_ball ) {
        cout << "Good swing. You blasted his wicket. He's out. It's your turn to bat and beat his score of " << comp_score << "." << endl;
        break;
        }
-            
-       
+
+
        comp_score += runs_per_ball;
        if (comp_score >= 50) {
        cout << "He has secured a half-century by scoring " << comp_score << ". You lose :(" << endl;
 
        return 0;
-       } 
+       }
      }
 
      if ( runs_per_ball == user_ball ) {
-       
+
        cout << "Please input your batting score on the first ball: ";
 
        cin >> runs_per_ball;
@@ -491,8 +491,8 @@ bool Game_cricket () {
        }
        user_score += runs_per_ball;
 
-      
-         
+
+
 
        while (user_score <= comp_score && comp_ball != runs_per_ball) {
          cout << "Good shot! ";
@@ -502,19 +502,19 @@ bool Game_cricket () {
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> runs_per_ball;
          }
-         
+
          comp_ball = (rand()%6) +1;
 
          if (comp_ball == runs_per_ball) {
            break;
          }
          user_score += runs_per_ball;
-         
+
        }
 
        if (user_score  > comp_score) {
          cout << "You beat his target by scoring " << user_score << ". Congratulations, you win!" << endl;
-         
+
          return 1;
        }
        else if (comp_ball == runs_per_ball && user_score== comp_score) {
@@ -522,13 +522,13 @@ bool Game_cricket () {
          return 1;
        }
 
-       
+
        else if (comp_ball == runs_per_ball) {
          cout << "You got out with a score of " << user_score << " before you could beat his target. you lose:(" << endl;
 
          return 1;
        }
-       
+
 
         else if (comp_score == user_score && user_ball == runs_per_ball) {
          cout << "Match ends in a tie. However, you played well and you will be allowed to escape. Congratulations!" << endl;
@@ -1292,9 +1292,9 @@ bool puzzle_collection(int stage, int num){
         case 1: //game 1, number guessing
         pass = s2g1();
         break;
-
+        pass = s2g2();
         case 2:
-        cout<<"game 2" <<endl;
+        pass =
         break;
 
         default:
