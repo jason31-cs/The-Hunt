@@ -81,13 +81,13 @@ bool s1g2() {
   int riddle_num = (rand()%3)+1;
   int count = 0;
 
-  cout << """You have to answer a riddle to get access to the locker, that contains the key to the exit door. Keep in mind, you only have three attempts and one hint available. Type in 'H' to use the hint but that would cost you one attempt. So be wise.""" << endl;
-
+  cout << """a locker, that contains the key to the exit door. You try opening it but fail to do so. It turns out you have to answer a riddle to successfully open it. However, Keep in mind you only have three attempts and one hint available. Type in 'H' to use the hint but that would cost you one attempt. So be wise.""" << endl;
+  cout << endl;
   switch (riddle_num) {
 
     case 1:
-    cout << """Q) A man looks at a painting in a museum and says, “Brothers and sisters I have none, but that man’s father is my father’s son.” Who is in the painting? (Please input a one word answer, stating the relationship of the observer of the painting with the man in it. For example, if you think the man himself is in the painting, type in 'himself') Type your answer here:  """;
-
+    cout << """Q) A man looks at a painting in a museum and says, “Brothers and sisters I have none, but that man’s father is my father’s son.” Who is in the painting? (Please input a one word answer, stating the relationship of the observer of the painting with the man in it. For example, if you think the man himself is in the painting, type in 'himself') Type your answer here:  """ << endl;
+    
     cin >> answer;
 
     if (answer == "H") {
@@ -98,7 +98,8 @@ bool s1g2() {
     }
 
     while (answer != "Son" && answer != "son" && answer != "SON" && count < 2) {
-      cout << "Wrong Answer. Please try again: ";
+      cout << "Wrong Answer. Please try again: " << endl;
+      
 
       cin >> answer;
 
@@ -112,32 +113,34 @@ bool s1g2() {
     }
 
       if (answer == "Son" || answer == "son" || answer == "SON" ) {
+        cout << endl;
       cout << "Correct answer. You win!" << endl;
       return 1;
       break;
     }
 
       else if (count == 2) {
-      cout << "Wrong answer. Game over. You lose :(" << endl;
-      return 0;
-      break;
+        cout << endl;
+        cout << "Wrong answer. Game over. You lose :(" << endl;
+        return 0;
+        break;
     }
 
     case 2:
-      cout << """Q) What is so fragile that saying its name breaks it? Type your answer here: """;
+      cout << """Q) What is so fragile that saying its name breaks it? Type your answer here: """ << endl;
 
 
       cin >> answer;
 
       if (answer == "H") {
       cout << "s _ l _ _ _ e" << endl;
-      cout << "Type your answer here: ";
+      cout << "Type your answer here: " << endl;
       cin >> answer;
       count++;
     }
 
       while (answer != "SILENCE" && answer != "silence" && answer != "Silence" && count < 2) {
-        cout << "Wrong Answer. Try again: ";
+        cout << "Wrong Answer. Try again: " << endl;
 
         cin >> answer;
 
@@ -151,9 +154,10 @@ bool s1g2() {
       }
 
         if (answer == "SILENCE" || answer == "silence" || answer == "Silence" ) {
-        cout << "Correct answer. You win!" << endl;
-        return 1;
-        break;
+          cout << endl;
+          cout << "Correct answer. You win!" << endl;
+          return 1;
+          break;
       }
 
         else if (count == 2) {
@@ -163,19 +167,19 @@ bool s1g2() {
       }
 
     case 3:
-    cout << """Q) I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I? Please type in your answer here: """;
+      cout << """Q) I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I? Please type in your answer here: """ << endl;
 
       cin >> answer;
 
       if (answer == "H") {
       cout << "s _ _ _ _ w" << endl;
-      cout << "Type your answer here: ";
+      cout << "Type your answer here: " << endl;
       cin >> answer;
       count++;
     }
 
       while (answer != "SHADOW" && answer != "Shadow" && answer != "shadow" && count < 2) {
-      cout << "Wrong answer. Try again: ";
+      cout << "Wrong answer. Try again: " << endl;
 
       cin >> answer;
 
@@ -465,6 +469,7 @@ bool s2g2 () {
      }
 
      if (user_score >= 50) {
+       cout << endl;
        cout << "You have secured a half-century with a score of " << user_score << ". Congratulations, you win!";
 
        return 1;
@@ -477,15 +482,18 @@ bool s2g2 () {
        cout << "You got out. It's your turn to bowl now. You have to stop him from beating your score of " << user_score << ". " << " It's your first bowl. Please input your bowling score: ";
 
        cin >> user_ball;
+       
        while (user_ball < 1 || user_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> user_ball;
+         cout << endl;
        }
        runs_per_ball = (rand()%6)+1;
 
 
        if (user_ball == runs_per_ball) {
          if (user_score == comp_score) {
+           cout << endl;
            cout << "wow! You blasted his wicket on the first ball. Match ends in a tie. However, he is satisfied and lets you win. Congratulations! :)" << endl;
 
            return 1;
@@ -493,6 +501,7 @@ bool s2g2 () {
          }
 
          else {
+           cout << endl;
            cout << "Wow! You blasted his wicket on the first ball. You win. Congratulations! :)" << endl;
            return 1;
          }
@@ -501,6 +510,7 @@ bool s2g2 () {
        comp_score += runs_per_ball;
 
        if (comp_score > user_score) {
+         cout << endl;
          cout << "He beat your target with a score of " << comp_score << ". You lose:(" << endl;
          return 0;
        }
@@ -514,6 +524,7 @@ bool s2g2 () {
          cout << "Please input next bowl's score: ";
 
          cin >> user_ball;
+      
          while (user_ball < 1 || user_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> user_ball;
@@ -522,14 +533,16 @@ bool s2g2 () {
          runs_per_ball = (rand()%6) +1;
 
          if (comp_score == user_score && user_ball == runs_per_ball) {
-         cout << "Match ends in a tie. However, you played well and you will be allowed to escape. Congratulations!" << endl;
-         return 1;
+           cout << endl;
+           cout << "Match ends in a tie. However, you played well and you will be allowed to escape. Congratulations!" << endl;
+           return 1;
        }
 
          if (user_ball == runs_per_ball) {
-         cout << "Good swing. You blasted his wicket. He's out with a total score of " << comp_score << ". before he could beat your score. You win, Congratulations!" << endl;
+           cout << endl;
+           cout << "Good swing. You blasted his wicket. He's out with a total score of " << comp_score << ". before he could beat your score. You win, Congratulations!" << endl;
 
-         return 1;
+           return 1;
        }
 
 
@@ -537,9 +550,10 @@ bool s2g2 () {
          comp_score += runs_per_ball;
 
          if (comp_score  > user_score) {
-         cout << "Opponent scored " << comp_score << ". " << "He beat your score. You lose :(" << endl;
+           cout << endl;
+           cout << "Opponent scored " << comp_score << ". " << "He beat your score. You lose :(" << endl;
 
-         return 0;
+           return 0;
        }
 
      }
@@ -589,9 +603,10 @@ bool s2g2 () {
 
        comp_score += runs_per_ball;
        if (comp_score >= 50) {
-       cout << "He has secured a half-century by scoring " << comp_score << ". You lose :(" << endl;
+         cout << endl;
+         cout << "He has secured a half-century by scoring " << comp_score << ". You lose :(" << endl;
 
-       return 0;
+         return 0;
        }
      }
 
@@ -609,11 +624,13 @@ bool s2g2 () {
 
        if (runs_per_ball == comp_ball) {
          if (comp_score == 0) {
-         cout << "Oops, you're out on the first ball. Match ends in a tie. However, he is satisfied and lets you escape! :)" << endl;
-         return 1;
+           cout << endl;
+           cout << "Oops, you're out on the first ball. Match ends in a tie. However, he is satisfied and lets you escape! :)" << endl;
+           return 1;
          }
 
          else {
+           cout << endl;
            cout << "Oops you're out on the first ball. You lose! :(" << endl;
            return 0;
          }
@@ -642,17 +659,20 @@ bool s2g2 () {
        }
 
        if (user_score  > comp_score) {
+         cout << endl;
          cout << "You beat his target by scoring " << user_score << ". Congratulations, you win!" << endl;
 
          return 1;
        }
        else if (comp_ball == runs_per_ball && user_score== comp_score) {
+         cout << endl;
          cout << "You got out at a score of " << user_score << ". Match ends in a tie. However, he is satisfied and lets you escape! :)" << endl;
          return 1;
        }
 
 
        else if (comp_ball == runs_per_ball) {
+         cout << endl;
          cout << "You got out with a score of " << user_score << " before you could beat his target. you lose:(" << endl;
 
          return 1;
@@ -660,6 +680,7 @@ bool s2g2 () {
 
 
         else if (comp_score == user_score && user_ball == runs_per_ball) {
+          cout << endl;
          cout << "Match ends in a tie. However, you played well and you will be allowed to escape. Congratulations!" << endl;
 
          return 0;
@@ -848,7 +869,7 @@ int comp_move (card *&b, int N, card card_in_round, int &idx, string &wild_color
 
   return 2;
   }
-//this fucntion makes sure computer plays a draw two if it is present and if the user is about to win
+//this fucntion makes sure computer plays a draw two if it is present and if the user is about to win (that is has one card remaining)
 bool check_comp_has_drawtwo (card *&b, int N, int &idx) {
 
   for (int i = 0; i < N; i++) {
