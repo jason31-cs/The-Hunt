@@ -397,6 +397,7 @@ int main(){
           if (c_health > 0){ // check if player died in game a
             a_done = 1;
             update_save(stage,choice,c_health,a_done,b_done); // save game
+            cout<<endl<<endl<<"progress saved..."<<endl<<endl;
             running_puzzles(stage,game_b,c_health); //game b
           }
           break;
@@ -414,6 +415,7 @@ int main(){
             if (c_health > 0){ // check if player died in game a
               a_done = 1;
               update_save(stage,choice,c_health,a_done,b_done); // save game
+              cout<<endl<<endl<<"progress saved..."<<endl<<endl;
               running_puzzles(stage,game_b,c_health); //game b
             }
           break;
@@ -422,12 +424,14 @@ int main(){
       if (c_health > 0){
         b_done = 1;
         update_save(stage,choice,c_health,a_done,b_done); //save game
+        cout<<endl<<endl<<"progress saved..."<<endl<<endl;
         stage++; // increase stage by 1, stage == 2
         a_done = 0;
         b_done = 0;
         userchoice = junction2();
         choice = userchoice;
         update_save(stage,choice,c_health,a_done,b_done); //save game
+        cout<<endl<<endl<<"progress saved..."<<endl<<endl;
       }
     }
 
@@ -450,6 +454,7 @@ int main(){
         if (c_health > 0){ // check if player died in game a
           a_done = 1;
           update_save(stage,choice,c_health,a_done,b_done); // save game
+          cout<<endl<<endl<<"progress saved..."<<endl<<endl;
           running_puzzles(stage,game_b,c_health); //game b
         }
         break;
@@ -467,6 +472,7 @@ int main(){
           if (c_health > 0){ // check if player died in game a
             a_done = 1;
             update_save(stage,choice,c_health,a_done,b_done); // save game
+            cout<<endl<<endl<<"progress saved..."<<endl<<endl;
             running_puzzles(stage,game_b,c_health); //game b
           }
         break;
@@ -474,10 +480,12 @@ int main(){
 
       b_done = 1;
       update_save(stage,choice,c_health,a_done,b_done);
+      cout<<endl<<endl<<"progress saved..."<<endl<<endl;
       b_done = 0;
       a_done = 0;
       stage++;
       update_save(stage,choice,c_health,a_done,b_done);
+      cout<<endl<<endl<<"progress saved..."<<endl<<endl;
 
     }
 
@@ -497,6 +505,7 @@ int main(){
           cout<<"You have no idea how you got there in the first place, but intuition tells you to not "<<endl;
           cout<<"think about it ever again. "<<endl;
           update_save(stage,choice,c_health,a_done,b_done);
+          cout<<endl<<endl<<"progress saved..."<<endl<<endl;
           cout<<"████████╗██╗  ██╗███████╗    ███████╗███╗   ██╗██████╗ "<<endl;
           cout<<"╚══██╔══╝██║  ██║██╔════╝    ██╔════╝████╗  ██║██╔══██╗"<<endl;
           cout<<"   ██║   ███████║█████╗      █████╗  ██╔██╗ ██║██║  ██║"<<endl;
