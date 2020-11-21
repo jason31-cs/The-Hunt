@@ -410,6 +410,11 @@ bool s2g2 () {
     cout << "You win the toss. Would you like to bat or bowl first? Please enter your choice (Bat/Bowl): ";
 
     cin >> bat_or_bowl;
+    
+    while (bat_or_bowl != "Bat" && bat_or_bowl != "Bowl") {
+      cout << "Please enter your choice in the format provided in the bracket ('Bat' / 'Bowl'): ;
+      cin >> bat_or_bowl;
+    }  
 
     cout << endl;
 
@@ -478,8 +483,6 @@ bool s2g2 () {
 
      }
 
-
-
      else if ( runs_per_ball == comp_ball ) {
        cout << "You got out. It's your turn to bowl now. You have to stop him from beating your score of " << user_score << ". " << " It's your first bowl. Please input your bowling score: ";
 
@@ -546,9 +549,6 @@ bool s2g2 () {
 
            return 1;
        }
-
-
-
          comp_score += runs_per_ball;
 
          if (comp_score  > user_score) {
@@ -557,12 +557,9 @@ bool s2g2 () {
 
            return 0;
        }
-
+      }
      }
-
-     }
-
-  }
+    }
 
   else if (bat_or_bowl == "Bowl") {
     cout << "Please get prepared to start bowling. Please input your score on the first ball: ";
@@ -583,9 +580,7 @@ bool s2g2 () {
 
 
      while (comp_score < 50 && runs_per_ball != user_ball) {
-
-
-
+       
        cout << "Not out. He scored " << runs_per_ball << ". Computer's Total score: " << comp_score << endl;
 
        cout << "Please enter your score for the next ball: ";
@@ -638,10 +633,7 @@ bool s2g2 () {
          }
        }
        user_score += runs_per_ball;
-
-
-
-
+       
        while (user_score <= comp_score && comp_ball != runs_per_ball) {
          cout << "Good shot! ";
          cout << "Your total score: " << user_score << endl;
@@ -672,23 +664,19 @@ bool s2g2 () {
          return 1;
        }
 
-
        else if (comp_ball == runs_per_ball) {
          cout << endl;
          cout << "You got out with a score of " << user_score << " before you could beat his target. you lose:(" << endl;
 
          return 1;
        }
-
-
-        else if (comp_score == user_score && user_ball == runs_per_ball) {
+       
+       else if (comp_score == user_score && user_ball == runs_per_ball) {
           cout << endl;
          cout << "Match ends in a tie. However, you played well and you will be allowed to escape. Congratulations!" << endl;
 
          return 0;
        }
-
-
      }
    }
   return 0;
@@ -1047,25 +1035,16 @@ bool s3_UNO() {
    cout<<""<<endl;
    cout<<"In front of the exit is an octopus looking creature, it raised its voice and said \" You"<<endl;
    cout<<"will not leave this place until you have won me in a game of UNO\" "<<endl;
-   int needhelp;
-   cout << "Do you know the rules? \'Y\' for yes, \'N\' for no"<<endl;
-   string poss_ans_uno[2]={"Y","N"};
-   puzzle_inputcheck(needhelp,poss_ans_uno, 2);
-   needhelp+=48;
-   if(needhelp == 'Y'){
-     cout << """This is the UNO card game, where both you and your opponent will be initially distributed 5 random UNO cards (cards can be repeated) that include number cards (of four colors), draw two's, and wild cards. You and your opponent will play your moves on top of the card in the centre. Here are the game rules: """ << endl;
+   
+   cout << """This is the UNO card game, where both you and your opponent will be initially distributed 5 random UNO cards (cards can be repeated) that include number cards (of four colors), draw two's, and wild cards. You and your opponent will play your moves on top of the card in the centre. Here are the game rules: """ << endl;
 
      cout << """1.) You can either play the same number card, same color card, or both, relative to the card in the centre of the current round.""" << endl;
      cout << """2.) Playing a draw two will make either player pick up two random cards.""" <<endl;
      cout << """3.) Playing a wild card will allow you to change the color of the card in the current round.""" << endl;
      cout <<"""4.) You can also pass if you are out of options, however, you will have to pick a random card then.""" << endl;
      cout << """5.) The first player to empty his list of cards wins!""" << endl;
-   }
-
-
-
-
-  while (n > 0 && N > 0) {
+   
+   while (n > 0 && N > 0) {
 
      cout << endl;
      cout << "x - - - - - - - - - -  - - - - - - -  - - - - - x" << endl;
