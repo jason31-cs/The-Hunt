@@ -1,4 +1,4 @@
-//puzzle.cpp
+whispered//puzzle.cpp
 #include <iostream>
 #include <ctime>
 #include <string>
@@ -60,10 +60,10 @@ bool s1g1(){
       }
       cout<< "You twisted the knob of the door but it did not unlock, yet you hear mechanisms clicking on the ceiling"<<endl;
       if (userin < correctdoor){
-        cout << "A voice wispeared in your ears saying \'bigger\'"<<endl;
+        cout << "A voice whispered in your ears saying \'bigger\'"<<endl;
       }
       else if (userin > correctdoor){
-        cout << "A voice wispeared in your ears saying \'smaller\'"<<endl;
+        cout << "A voice whispered in your ears saying \'smaller\'"<<endl;
       }
       cout<<tries - 1 << " tries remaining"<<endl;
   }
@@ -87,7 +87,7 @@ bool s1g2() {
 
     case 1:
     cout << """Q) A man looks at a painting in a museum and says, “Brothers and sisters I have none, but that man’s father is my father’s son.” Who is in the painting? (Please input a one word answer, stating the relationship of the observer of the painting with the man in it. For example, if you think the man himself is in the painting, type in 'himself') Type your answer here:  """ << endl;
-    
+
     cin >> answer;
 
     if (answer == "H") {
@@ -99,7 +99,7 @@ bool s1g2() {
 
     while (answer != "Son" && answer != "son" && answer != "SON" && count < 2) {
       cout << "Wrong Answer. Please try again: " << endl;
-      
+
 
       cin >> answer;
 
@@ -410,11 +410,11 @@ bool s2g2 () {
     cout << "You win the toss. Would you like to bat or bowl first? Please enter your choice (Bat/Bowl): ";
 
     cin >> bat_or_bowl;
-    
+
     while (bat_or_bowl != "Bat" && bat_or_bowl != "Bowl") {
       cout << "Please enter your choice in the format provided in the bracket ('Bat' / 'Bowl'): ";
       cin >> bat_or_bowl;
-    }  
+    }
 
     cout << endl;
 
@@ -489,7 +489,7 @@ bool s2g2 () {
        cout << "Please input your bowling score: ";
 
        cin >> user_ball;
-       
+
        while (user_ball < 1 || user_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> user_ball;
@@ -531,7 +531,7 @@ bool s2g2 () {
          cout << "Please input next bowl's score: ";
 
          cin >> user_ball;
-      
+
          while (user_ball < 1 || user_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
          cin >> user_ball;
@@ -582,7 +582,7 @@ bool s2g2 () {
 
 
      while (comp_score < 50 && runs_per_ball != user_ball) {
-       
+
        cout << "Not out. He scored " << runs_per_ball << ". Computer's Total score: " << comp_score << endl;
 
        cout << "Please enter your score for the next ball: ";
@@ -635,7 +635,7 @@ bool s2g2 () {
          }
        }
        user_score += runs_per_ball;
-       
+
        while (user_score <= comp_score && comp_ball != runs_per_ball) {
          cout << "Good shot! ";
          cout << "Your total score: " << user_score << endl;
@@ -673,7 +673,7 @@ bool s2g2 () {
 
          return 1;
        }
-       
+
        else if (comp_score == user_score && user_ball == runs_per_ball) {
           cout << endl;
          cout << "Match ends in a tie. However, you played well and you will be allowed to escape. Congratulations!" << endl;
@@ -1038,7 +1038,7 @@ bool s3_UNO() {
    cout<<""<<endl;
    cout<<"In front of the exit is an octopus looking creature, it raised its voice and said \" You"<<endl;
    cout<<"will not leave this place until you have won me in a game of UNO\" "<<endl;
-   
+
    cout << """This is the UNO card game, where both you and your opponent will be initially distributed 5 random UNO cards (cards can be repeated) that include number cards (of four colors), draw two's, and wild cards. You and your opponent will play your moves on top of the card in the centre. Here are the game rules: """ << endl;
 
      cout << """1.) You can either play the same number card, same color card, or both, relative to the card in the centre of the current round.""" << endl;
@@ -1046,7 +1046,7 @@ bool s3_UNO() {
      cout << """3.) Playing a wild card will allow you to change the color of the card in the current round.""" << endl;
      cout <<"""4.) You can also pass if you are out of options, however, you will have to pick a random card then.""" << endl;
      cout << """5.) The first player to empty his list of cards wins!""" << endl;
-   
+
    while (n > 0 && N > 0) {
 
      cout << endl;
