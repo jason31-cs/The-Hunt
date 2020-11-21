@@ -89,6 +89,7 @@ void initialize(){
   cout<<"diff: "<<diff<<endl;
 
   //test
+  cout << "loading..."<<endl;
   for (int i = 0; i < prog_size ; i++){
     cout<< "stage " << progress[i].stage;
     cout<< " choice " << progress[i].choice;

@@ -74,8 +74,8 @@ bool s1g1(){
 
 //Riddle game(stage 1)
 //This function asks the user a riddle and returns 1 if answered correctly
-bool Game_riddles() {
-  
+bool s1g2() {
+
   srand(time(NULL));
   string answer;
   int riddle_num = (rand()%3)+1;
@@ -87,7 +87,7 @@ bool Game_riddles() {
 
     case 1:
     cout << """Q) A man looks at a painting in a museum and says, “Brothers and sisters I have none, but that man’s father is my father’s son.” Who is in the painting? (Please input a one word answer, stating the relationship of the observer of the painting with the man in it. For example, if you think the man himself is in the painting, type in 'himself') Type your answer here:  """;
-    
+
     cin >> answer;
 
     if (answer == "H") {
@@ -110,7 +110,7 @@ bool Game_riddles() {
       }
       count++;
     }
-    
+
       if (answer == "Son" || answer == "son" || answer == "SON" ) {
       cout << "Correct answer. You win!" << endl;
       return 1;
@@ -123,10 +123,10 @@ bool Game_riddles() {
       break;
     }
 
-    case 2: 
+    case 2:
       cout << """Q) What is so fragile that saying its name breaks it? Type your answer here: """;
-      
-      
+
+
       cin >> answer;
 
       if (answer == "H") {
@@ -138,7 +138,7 @@ bool Game_riddles() {
 
       while (answer != "SILENCE" && answer != "silence" && answer != "Silence" && count < 2) {
         cout << "Wrong Answer. Try again: ";
-        
+
         cin >> answer;
 
         if (answer == "H") {
@@ -189,7 +189,7 @@ bool Game_riddles() {
       count++;
     }
 
-      if (answer == "SHADOW" || answer == "Shadow" || answer == "shadow") { 
+      if (answer == "SHADOW" || answer == "Shadow" || answer == "shadow") {
         cout << "Correct answer. You win!" << endl;
         return 1;
         break;
@@ -219,7 +219,6 @@ void displaygrid(char grid[][3]){
   cout<<"\t      |     |     "<<endl;
   cout<<endl<<"======================================================"<<endl;
 }
-
 bool check_connect(char grid[][3]){
   int sum;
   //check row
@@ -266,7 +265,6 @@ bool check_connect(char grid[][3]){
   }
   return 0;
 }
-
 bool s2g1(){
   //tic tac toe
   //winner 0 = comp, 1 = player
@@ -1407,7 +1405,7 @@ bool puzzle_collection(int stage, int num){
         break;
 
         case 2:
-
+        pass = s1g2();
         break;
 
         default:
