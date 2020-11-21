@@ -193,11 +193,13 @@ bool s1g2() {
         cout << "Correct answer. You win!" << endl;
         return 1;
         break;
+
       }
       else if (count == 2) {
         cout << "Game Over" << endl;
         return 0;
       }
+
   }
   return 0;
 }
@@ -1403,12 +1405,12 @@ bool puzzle_collection(int stage, int num){
     case 1:
       switch (num){
         case 1: //game 1, tictactoe
-        pass = s1g1();
-        break;
+          pass = s1g1();
+          break;
 
         case 2:
-        pass = s1g2();
-        break;
+          pass = s1g2();
+          break;
 
         default:
         cout<<"game out of range"<<endl;
@@ -1420,12 +1422,11 @@ bool puzzle_collection(int stage, int num){
     case 2:
       switch (num){
         case 1: //game 1, number guessing
-        pass = s2g1();
-        break;
-        pass = s2g2();
+          pass = s2g1();
+          break;
         case 2:
-        pass =
-        break;
+          pass = s2g2();
+          break;
 
         default:
         cout<<"game out of range"<<endl;
@@ -1434,8 +1435,8 @@ bool puzzle_collection(int stage, int num){
     break;
     //stage 3
     case 3:
-    pass = s3_UNO();
-    break;
+      pass = s3_UNO();
+      break;
 
     default:
       cout<< "stage out of bound"<<endl;
