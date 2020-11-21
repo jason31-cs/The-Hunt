@@ -412,7 +412,7 @@ bool s2g2 () {
     cin >> bat_or_bowl;
     
     while (bat_or_bowl != "Bat" && bat_or_bowl != "Bowl") {
-      cout << "Please enter your choice in the format provided in the bracket ('Bat' / 'Bowl'): ;
+      cout << "Please enter your choice in the format provided in the bracket ('Bat' / 'Bowl'): ";
       cin >> bat_or_bowl;
     }  
 
