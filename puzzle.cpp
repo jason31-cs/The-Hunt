@@ -72,6 +72,136 @@ bool s1g1(){
   return 0;
 }
 
+//Riddle game(stage 1)
+//This function asks the user a riddle and returns 1 if answered correctly
+bool Game_riddles() {
+  
+  srand(time(NULL));
+  string answer;
+  int riddle_num = (rand()%3)+1;
+  int count = 0;
+
+  cout << """You have to answer a riddle to get access to the locker, that contains the key to the exit door. Keep in mind, you only have three attempts and one hint available. Type in 'H' to use the hint but that would cost you one attempt. So be wise.""" << endl;
+
+  switch (riddle_num) {
+
+    case 1:
+    cout << """Q) A man looks at a painting in a museum and says, “Brothers and sisters I have none, but that man’s father is my father’s son.” Who is in the painting? (Please input a one word answer, stating the relationship of the observer of the painting with the man in it. For example, if you think the man himself is in the painting, type in 'himself') Type your answer here:  """;
+    
+    cin >> answer;
+
+    if (answer == "H") {
+      cout << "_ _ _" << endl;
+      cout << "Type your answer here: ";
+      cin >> answer;
+      count++;
+    }
+
+    while (answer != "Son" && answer != "son" && answer != "SON" && count < 2) {
+      cout << "Wrong Answer. Please try again: ";
+
+      cin >> answer;
+
+      if (answer == "H") {
+        cout << "_ _ _" << endl;
+        cout << "Try again: ";
+        cin >> answer;
+        count++;
+      }
+      count++;
+    }
+    
+      if (answer == "Son" || answer == "son" || answer == "SON" ) {
+      cout << "Correct answer. You win!" << endl;
+      return 1;
+      break;
+    }
+
+      else if (count == 2) {
+      cout << "Wrong answer. Game over. You lose :(" << endl;
+      return 0;
+      break;
+    }
+
+    case 2: 
+      cout << """Q) What is so fragile that saying its name breaks it? Type your answer here: """;
+      
+      
+      cin >> answer;
+
+      if (answer == "H") {
+      cout << "s _ l _ _ _ e" << endl;
+      cout << "Type your answer here: ";
+      cin >> answer;
+      count++;
+    }
+
+      while (answer != "SILENCE" && answer != "silence" && answer != "Silence" && count < 2) {
+        cout << "Wrong Answer. Try again: ";
+        
+        cin >> answer;
+
+        if (answer == "H") {
+          cout << "s _ l _ _ _ e" << endl;
+          cout << "Try again: ";
+          cin >> answer;
+          count++;
+        }
+        count++;
+      }
+
+        if (answer == "SILENCE" || answer == "silence" || answer == "Silence" ) {
+        cout << "Correct answer. You win!" << endl;
+        return 1;
+        break;
+      }
+
+        else if (count == 2) {
+        cout << "Wrong answer. Game over. You lose :(" << endl;
+        return 0;
+        break;
+      }
+
+    case 3:
+    cout << """Q) I follow you all the time and copy your every move, but you can’t touch me or catch me. What am I? Please type in your answer here: """;
+
+      cin >> answer;
+
+      if (answer == "H") {
+      cout << "s _ _ _ _ w" << endl;
+      cout << "Type your answer here: ";
+      cin >> answer;
+      count++;
+    }
+
+      while (answer != "SHADOW" && answer != "Shadow" && answer != "shadow" && count < 2) {
+      cout << "Wrong answer. Try again: ";
+
+      cin >> answer;
+
+      if (answer == "H") {
+        cout << "s _ _ d _ _" << endl;
+        cout << "Type your answer here: ";
+        cin >> answer;
+        count++;
+
+      }
+      count++;
+    }
+
+      if (answer == "SHADOW" || answer == "Shadow" || answer == "shadow") { 
+        cout << "Correct answer. You win!" << endl;
+        return 1;
+        break;
+      }
+      else if (count == 2) {
+        cout << "Game Over" << endl;
+        return 0;
+      }
+  }
+}
+
+
 //stage 2 games:
 //game 1 (tictactoe):
 void displaygrid(char grid[][3]){
