@@ -1038,6 +1038,8 @@ bool s3_UNO() {
    cout<<""<<endl;
    cout<<"In front of the exit is an octopus looking creature, it raised its voice and said \" You"<<endl;
    cout<<"will not leave this place until you have won me in a game of UNO\" "<<endl;
+  
+   cout << endl;
    
    cout << """This is the UNO card game, where both you and your opponent will be initially distributed 5 random UNO cards (cards can be repeated) that include number cards (of four colors), draw two's, and wild cards. You and your opponent will play your moves on top of the card in the centre. Here are the game rules: """ << endl;
 
@@ -1117,6 +1119,10 @@ bool s3_UNO() {
       }
       cout << "Please type in the new colour in lowercase letter: ";
       getline(cin, new_color);
+      while (new_color != "red" && new_color != "blue" && new_color != "green" && new_color != "yellow") {
+        cout << "Please type in the new colour in lowercase letter: ";
+        getline(cin, new_color);
+      }  
       delete_a_card (user_cards, n, index);
       if (n == 0) {
         break;
