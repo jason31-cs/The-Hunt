@@ -181,7 +181,7 @@ bool s2g1(){
     displaygrid(grid);
 
     if (check_connect(grid)){
-      cout<<"You won!, the metal locks on the door opened up."<<endl;
+      cout<<"You won!, the metal locks on the door opened up. You opened it and see..."<<endl;
       return 1;
     }
     empty = 0;
@@ -576,14 +576,25 @@ bool s3_UNO() {
    string card;
    int index;
    int idx;
+   cout<<""<<endl;
+   cout<<"In front of the exit is an octopus looking creature, it raised its voice and said \" You"<<endl;
+   cout<<"will not leave this place until you have won me in a game of UNO\" "<<endl;
+   int needhelp;
+   cout << "Do you know the rules? \'Y\' for yes, \'N\' for no"<<endl;
+   string poss_ans_uno[2]={"Y","N"};
+   puzzle_inputcheck(needhelp,poss_ans_uno, 2);
+   needhelp+=48;
+   if(needhelp == 'Y'){
+     cout << """This is the UNO card game, where both you and your opponent will be initially distributed 5 random UNO cards (cards can be repeated) that include number cards (of four colors), draw two's, and wild cards. You and your opponent will play your moves on top of the card in the centre. Here are the game rules: """ << endl;
 
-   cout << """This is the UNO card game, where both you and your opponent will be initially distributed 5 random UNO cards (cards can be repeated) that include number cards (of four colors), draw two's, and wild cards. You and your opponent will play your moves on top of the card in the centre. Here are the game rules: """ << endl;
+     cout << """1.) You can either play the same number card, same color card, or both, relative to the card in the centre of the current round.""" << endl;
+     cout << """2.) Playing a draw two will make either player pick up two random cards.""" <<endl;
+     cout << """3.) Playing a wild card will allow you to change the color of the card in the current round.""" << endl;
+     cout <<"""4.) You can also pass if you are out of options, however, you will have to pick a random card then.""" << endl;
+     cout << """5.) The first player to empty his list of cards wins!""" << endl;
+   }
 
-   cout << """1.) You can either play the same number card, same color card, or both, relative to the card in the centre of the current round.""" << endl;
-   cout << """2.) Playing a draw two will make either player pick up two random cards.""" <<endl;
-   cout << """3.) Playing a wild card will allow you to change the color of the card in the current round.""" << endl;
-   cout <<"""4.) You can also pass if you are out of options, however, you will have to pick a random card then.""" << endl;
-   cout << """5.) The first player to empty his list of cards wins!""" << endl;
+
 
 
   while (n > 0 && N > 0) {
