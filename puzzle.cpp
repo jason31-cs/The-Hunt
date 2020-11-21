@@ -4,10 +4,9 @@
 
 using namespace std;
 
-//games need to return boolean
-//stage 1 games:
-//game 1 (tictactoe):
-void tictactoe_inputcheck(int & ans,string poss_ans[],int num_ans){
+//games need to return boolean, 1 for winning, 0 for loosing
+//skeleton
+void puzzle_inputcheck(int & ans,string poss_ans[],int num_ans){
   bool valid = 0;
   string temp_ans;
   while (!valid){
@@ -34,6 +33,11 @@ void tictactoe_inputcheck(int & ans,string poss_ans[],int num_ans){
   }
   ans = temp_ans[0]-48;
 }
+
+
+//stage 1 games:
+//game 1 (tictactoe):
+
 
 void displaygrid(char grid[][3]){
   cout <<"======================================================"<<endl;
@@ -125,9 +129,9 @@ bool s1g1(){
     cout<<"Your turn, choose where to put: "<<endl;
     while(invalid){
       cout<<"Input row: "<<endl;
-      tictactoe_inputcheck(row,poss_ans,3);
+      puzzle_inputcheck(row,poss_ans,3);
       cout <<"Input column: "<<endl;
-      tictactoe_inputcheck(column,poss_ans,3);
+      puzzle_inputcheck(column,poss_ans,3);
       if(grid[row-1][column-1] == '-'){
         invalid = 0;
       }
@@ -140,7 +144,7 @@ bool s1g1(){
     displaygrid(grid);
 
     if (check_connect(grid)){
-      cout<<"You won!, the metal locks on the door opened up revealing another door"<<endl;
+      cout<<"You won!, the metal locks on the door opened up."<<endl;
       return 1;
     }
     empty = 0;
@@ -184,6 +188,42 @@ bool s1g1(){
   return 0;
 }
 
+
+//stage 2 games:
+//game 1 (guessing number)
+bool s2g1(){
+
+  int userin;
+  string poss_ans[10]={"1","2","3","4","5","6","7","8","9","0"};
+  cout<<" "<<endl;
+  cout<<"A dark corridor leading to a  chamber, there are doors covering the far end, "<<endl;
+  cout<<"labelled from 0 - 9. On the ceiling you noticed that there are carvings which reads"<<endl;
+  cout<<"\"10 doors appear infront of you, only one leads to your escape, guess too many times and it will be"<<endl;
+  cout<<"your demise.\""<<endl;
+  cout<<"Which one would you want to go through?"<<endl;
+  int correctdoor = rand()%10;
+  for(int tries = 3 ; tries > 0 ; tries--){
+      puzzle_inputcheck(userin,poss_ans,10);
+      if (userin == correctdoor){
+        cout<< "You twisted the knob of the door and you can hear the locks clicking and maneuvering around the door frame"<<endl;
+        cout << "You pushed the door, revealing a staircase that leads downwards."<<endl;
+        cout<< "After traversing down the pathway, you landed in another huge chamber, and see..."<<endl;
+        return 1;
+      }
+      cout<< "You twisted the knob of the door but it did not unlock, yet you hear mechanisms clicking on the ceiling"<<endl;
+      if (userin < correctdoor){
+        cout << "A voice wispeared in your ears saying \'bigger\'"<<endl;
+      }
+      else if (userin > correctdoor){
+        cout << "A voice wispeared in your ears saying \'smaller\'"<<endl;
+      }
+      cout<<tries - 1 << " tries remaining"<<endl;
+  }
+  cout<<"It is too late, this time, a trap door ontop of you suddenly opened, and a dozon of snakes dropped down"<<endl;
+  cout<<"A few of them bit you, health is deducted"<<endl;
+  return 0;
+}
+
 //put game functions here
 bool puzzle_collection(int stage, int num){
   bool pass = 1;
@@ -192,7 +232,7 @@ bool puzzle_collection(int stage, int num){
     case 1:
       cout<<"stage 1"<<endl;
       switch (num){
-        case 1:
+        case 1: //game 1, tictactoe
         pass = s1g1();
         break;
 
@@ -218,8 +258,8 @@ bool puzzle_collection(int stage, int num){
     case 2:
       cout<<"stage 2"<<endl;
       switch (num){
-        case 1:
-        cout<<"game 1" <<endl;
+        case 1: //game 1, number guessing
+        pass = s2g1();
         break;
 
         case 2:
