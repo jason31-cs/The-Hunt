@@ -484,7 +484,9 @@ bool s2g2 () {
      }
 
      else if ( runs_per_ball == comp_ball ) {
-       cout << "You got out. It's your turn to bowl now. You have to stop him from beating your score of " << user_score << ". " << " It's your first bowl. Please input your bowling score: ";
+       cout << endl;
+       cout << "You got out. It's your turn to bowl now. You have to stop him from beating your score of " << user_score << ". " << " It's your first bowl. " << endl;
+       cout << "Please input your bowling score: ";
 
        cin >> user_ball;
        
@@ -637,6 +639,7 @@ bool s2g2 () {
        while (user_score <= comp_score && comp_ball != runs_per_ball) {
          cout << "Good shot! ";
          cout << "Your total score: " << user_score << endl;
+         cout << "Please enter your batting score on the next ball: ";
          cin >> runs_per_ball;
          while (runs_per_ball < 1 || runs_per_ball > 6){
          cout << "Please enter a number in the range 1-6: "<<endl;
