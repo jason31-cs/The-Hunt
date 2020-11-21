@@ -484,8 +484,6 @@ void add_new_cards(card *&user_cards, int &n, int new_size) {
 bool s3_UNO() {
 
   srand(time(NULL));
-
-
   int random_color, random_num;
 
   int n = 5;
@@ -937,6 +935,7 @@ bool s3_UNO() {
     return 0;
     cout << endl;
   }
+  else return 0;
 
 }
 
