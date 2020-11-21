@@ -340,10 +340,10 @@ int junction2(){
 
 int main(){
   int userchoice,choice0,choice1,game_a,game_b;
-  const int no_stage1puzzles = 4;
-  const int no_stage2puzzles = 4;
-  int stage1[no_stage1puzzles]={1,2,3,4}; // 4 games in stage 1 of the hunt
-  int stage2[no_stage2puzzles]={1,2,3,4}; // 4 games in stage 2 of the hunt
+  const int no_stage1puzzles = 2;
+  const int no_stage2puzzles = 2;
+  int stage1[no_stage1puzzles]={1,2}; // 4 games in stage 1 of the hunt
+  int stage2[no_stage2puzzles]={1,2}; // 4 games in stage 2 of the hunt
 
   initialize();
 
