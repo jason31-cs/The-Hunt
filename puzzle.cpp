@@ -199,6 +199,7 @@ bool s1g2() {
         return 0;
       }
   }
+  return 0;
 }
 
 
@@ -667,6 +668,7 @@ bool s2g2 () {
 
      }
    }
+  return 0;
 }
 //Cricket game ends here
 
