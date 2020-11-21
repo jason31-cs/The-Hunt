@@ -1,6 +1,8 @@
 //puzzle.cpp
 #include <iostream>
 #include <ctime>
+#include <string>
+#include <cstdlib>
 
 using namespace std;
 
@@ -36,9 +38,44 @@ void puzzle_inputcheck(int & ans,string poss_ans[],int num_ans){
 
 
 //stage 1 games:
+//game 1 (guessing number)
+bool s1g1(){
+
+  int userin;
+  string poss_ans[10]={"1","2","3","4","5","6","7","8","9","0"};
+  cout<<" "<<endl;
+  cout<<"A dark corridor leading to a  chamber, there are doors covering the far end, "<<endl;
+  cout<<"labelled from 0 - 9. On the ceiling you noticed that there are carvings which reads"<<endl;
+  cout<<"\"10 doors appear infront of you, only one leads to your escape, guess too many times and it will be"<<endl;
+  cout<<"your demise.\""<<endl;
+  cout<<"Which one would you want to go through?"<<endl;
+  int correctdoor = rand()%10;
+  for(int tries = 3 ; tries > 0 ; tries--){
+      puzzle_inputcheck(userin,poss_ans,10);
+      if (userin == correctdoor){
+        cout<< "You twisted the knob of the door and you can hear the locks clicking and maneuvering around the door frame"<<endl;
+        cout << "You pushed the door, revealing a staircase that leads downwards."<<endl;
+        cout<< "After traversing down the pathway, you landed in another huge chamber, and see..."<<endl;
+        return 1;
+      }
+      cout<< "You twisted the knob of the door but it did not unlock, yet you hear mechanisms clicking on the ceiling"<<endl;
+      if (userin < correctdoor){
+        cout << "A voice wispeared in your ears saying \'bigger\'"<<endl;
+      }
+      else if (userin > correctdoor){
+        cout << "A voice wispeared in your ears saying \'smaller\'"<<endl;
+      }
+      cout<<tries - 1 << " tries remaining"<<endl;
+  }
+  cout<<"It is too late, this time, a trap door ontop of you suddenly opened, and a dozon of snakes dropped down"<<endl;
+  cout<<"A few of them bit you, health is deducted"<<endl;
+  return 0;
+}
+
+
+
+//stage 2 games:
 //game 1 (tictactoe):
-
-
 void displaygrid(char grid[][3]){
   cout <<"======================================================"<<endl;
   cout<<"column\t   1     2     3"<<endl;
@@ -102,7 +139,7 @@ bool check_connect(char grid[][3]){
   return 0;
 }
 
-bool s1g1(){
+bool s2g1(){
   //tic tac toe
   //winner 0 = comp, 1 = player
   int row,column;
@@ -189,49 +226,9 @@ bool s1g1(){
 }
 
 
-//stage 2 games:
-//game 1 (guessing number)
-bool s2g1(){
 
-  int userin;
-  string poss_ans[10]={"1","2","3","4","5","6","7","8","9","0"};
-  cout<<" "<<endl;
-  cout<<"A dark corridor leading to a  chamber, there are doors covering the far end, "<<endl;
-  cout<<"labelled from 0 - 9. On the ceiling you noticed that there are carvings which reads"<<endl;
-  cout<<"\"10 doors appear infront of you, only one leads to your escape, guess too many times and it will be"<<endl;
-  cout<<"your demise.\""<<endl;
-  cout<<"Which one would you want to go through?"<<endl;
-  int correctdoor = rand()%10;
-  for(int tries = 3 ; tries > 0 ; tries--){
-      puzzle_inputcheck(userin,poss_ans,10);
-      if (userin == correctdoor){
-        cout<< "You twisted the knob of the door and you can hear the locks clicking and maneuvering around the door frame"<<endl;
-        cout << "You pushed the door, revealing a staircase that leads downwards."<<endl;
-        cout<< "After traversing down the pathway, you landed in another huge chamber, and see..."<<endl;
-        return 1;
-      }
-      cout<< "You twisted the knob of the door but it did not unlock, yet you hear mechanisms clicking on the ceiling"<<endl;
-      if (userin < correctdoor){
-        cout << "A voice wispeared in your ears saying \'bigger\'"<<endl;
-      }
-      else if (userin > correctdoor){
-        cout << "A voice wispeared in your ears saying \'smaller\'"<<endl;
-      }
-      cout<<tries - 1 << " tries remaining"<<endl;
-  }
-  cout<<"It is too late, this time, a trap door ontop of you suddenly opened, and a dozon of snakes dropped down"<<endl;
-  cout<<"A few of them bit you, health is deducted"<<endl;
-  return 0;
-}
 
 //UNO game (stage 3)
-#include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
-
-using namespace std;
-
 struct card {
     string color;
     int num;
@@ -247,7 +244,7 @@ bool check_correct_input_card (card *&user_cards, int n,string user_move, int &i
         return true;
       }
     }
-    
+
   }
   else if (user_move == "wild") {
      for (int i = 0; i < n; i++){
@@ -255,8 +252,8 @@ bool check_correct_input_card (card *&user_cards, int n,string user_move, int &i
         index = i;
         return true;
       }
-     } 
-    
+     }
+
   }
   else if (user_move == "pass"){
     return true;
@@ -270,25 +267,23 @@ bool check_correct_input_card (card *&user_cards, int n,string user_move, int &i
 
   for (int i = 0; i < n;i++) {
     if (colour == user_cards[i].color && int(int(a)-48) == user_cards[i].num) {
-      
+
       index = i;
       return true;
     }
-    
+
   }
 
   return false;
 
 }
-
-
 //this function returns true if the card played by the user is valid and false, if otherwise
 bool check_cardincentre_and_user_move (string user_move, card card_in_round, string &wild_color, card *&user_cards, int n, int index ) {
   if (user_move == "draw two"){
     for (int i = 0; i < n;i++) {
       if (user_cards[i].color == "draw two") {
         index = i;
-      } 
+      }
     }
     return true;
   }
@@ -296,7 +291,7 @@ bool check_cardincentre_and_user_move (string user_move, card card_in_round, str
     for (int i = 0; i < n;i++) {
       if (user_cards[i].color == "wild") {
         index = i;
-      } 
+      }
     }
     return true;
   }
@@ -338,35 +333,34 @@ bool check_cardincentre_and_user_move (string user_move, card card_in_round, str
   else if (colour == wild_color) {
     return true;
   }
-  
+
   else {
     return false;
   }
 }
-
 //this function ensures the card played by the computer is valid and according to game rules
 int comp_move (card *&b, int N, card card_in_round, int &idx, string &wild_color) {
   for (int i = 0; i < N; i++) {
     if (b[i].color == card_in_round.color && b[i].num == card_in_round.num) {
       cout << "Computer plays " << b[i].color << " " << b[i].num << endl;
-      
+
       idx = i;
       return 1;
 
     }
     else if (b[i].color == card_in_round.color && b[i].num != card_in_round.num) {
       cout << "Computer plays a " <<b[i].color << " " << b[i].num << endl;
-      
+
       idx = i;
       return 1;
     }
     else if (b[i].num == card_in_round.num && b[i].color != card_in_round.color) {
       cout << "Computer plays a " << b[i].color << " " << b[i].num << endl;
-      
+
       idx = i;
       return 1;
     }
-  
+
 
     else if (b[i].color == "draw two" ){
       cout << "Computer plays a draw two. Oops, you have to pick up 2 cards now." << endl;
@@ -380,7 +374,7 @@ int comp_move (card *&b, int N, card card_in_round, int &idx, string &wild_color
       card_in_round.color = "red";
       wild_color = "red";
       card_in_round.num = -1;
-      
+
 
     }
     else if (rand_color == 2) {
@@ -406,11 +400,9 @@ int comp_move (card *&b, int N, card card_in_round, int &idx, string &wild_color
 
     }
   cout << "Computer is going to pass. Your turn!" << endl;
-  
+
   return 2;
   }
-  
-
 //this fucntion makes sure computer plays a draw two if it is present and if the user is about to win
 bool check_comp_has_drawtwo (card *&b, int N, int &idx) {
 
@@ -419,27 +411,25 @@ bool check_comp_has_drawtwo (card *&b, int N, int &idx) {
       idx = i;
       return true;
     }
-    
+
   }
   return false;
 
-}  
-
+}
 //this function deletes the cards played by the user and computer respectively, thus handling the dynamic lists of cards
 void delete_a_card (card *&user_cards, int&n, int index) {
-  
+
  for (int i = index; i < n-1; i++) {
    user_cards[i].color = user_cards[i+1].color;
    user_cards[i].num = user_cards[i+1].num;
  }
 
  n = n-1;
-  
-}  
 
+}
 //this function appends new cards to the user's and computer's list of cards respectively
 void add_new_cards(card *&user_cards, int &n, int new_size) {
-  
+
  card * list_cards = new card[new_size];
 
  for (int i = 0; i < n; i++) {
@@ -479,7 +469,7 @@ void add_new_cards(card *&user_cards, int &n, int new_size) {
 
   }
 
- 
+
 
  user_cards = new card[new_size];
 
@@ -488,25 +478,23 @@ void add_new_cards(card *&user_cards, int &n, int new_size) {
     user_cards[i].num = list_cards[i].num;
   }
 
-  n = new_size;  
+  n = new_size;
 }
-  
- 
 
-bool UNO_stage_three () {
+bool s3_UNO() {
 
   srand(time(NULL));
-  
+
 
   int random_color, random_num;
 
   int n = 5;
   int N = 5;
-  
+
   card * user_cards = new card[n];
   card * b = new card[N];
 
-  
+
 //the following for-loops distribute cards randomly to the user and computer
   for (int i = 0; i < n; i++) {
 
@@ -519,7 +507,7 @@ bool UNO_stage_three () {
     }
     else {
       user_cards[i].num = random_num;
-    
+
       random_color = (rand()%4) +1;
     if (random_color == 1) {
       user_cards[i].color = "red";
@@ -534,7 +522,7 @@ bool UNO_stage_three () {
       user_cards[i].color = "yellow";
     }
   }
-  
+
  }
 
   for (int i = 0; i < N; i++) {
@@ -547,7 +535,7 @@ bool UNO_stage_three () {
     }
     else {
       b[i].num = random_num;
-    
+
 
       random_color = (rand()%4) +1;
     if (random_color == 1) {
@@ -578,11 +566,11 @@ bool UNO_stage_three () {
    }
    else if  (random_color == 3) {
      card_in_round.color = "green";
-   } 
+   }
    else {
      card_in_round.color = "yellow";
    }
- 
+
    string user_move;
    string new_color;
    string colour;
@@ -599,7 +587,7 @@ bool UNO_stage_three () {
    cout <<"""4.) You can also pass if you are out of options, however, you will have to pick a random card then.""" << endl;
    cout << """5.) The first player to empty his list of cards wins!""" << endl;
 
-   
+
   while (n > 0 && N > 0) {
 
      cout << endl;
@@ -615,11 +603,11 @@ bool UNO_stage_three () {
        else if (user_cards[i].color == "wild") {
          cout << user_cards[i].color << endl;
        }
-   
+
        else {
          cout << user_cards[i].color << " " << user_cards[i].num << endl;
        }
-   
+
      }
 
      cout << endl;
@@ -649,13 +637,13 @@ bool UNO_stage_three () {
       getline(cin, user_move);
 
       cout << endl;
-     
+
       c = check_correct_input_card (user_cards, n , user_move, index);
     }
 
     char y = check_cardincentre_and_user_move(user_move, card_in_round, wild_color, user_cards, n, index );
 
-   
+
 
     while (y != true ) {
       cout << "This card cannot be played. Please play the correct card. " << endl;
@@ -678,7 +666,7 @@ bool UNO_stage_three () {
       card_in_round.num = -1;
 
       if (check_comp_has_drawtwo (b, N, idx) == true && n == 1 ) {
-       
+
         cout << "Oops. Computer plays a draw two." << endl;
         if (N== 1) {
           break;
@@ -687,13 +675,13 @@ bool UNO_stage_three () {
         delete_a_card (b, N, idx );
         add_new_cards (user_cards, n, n+2);
         card_in_round.color = "draw two";
-    
+
       }
 
      else  {
        int f;
        f = comp_move(b, N, card_in_round, idx, wild_color);
-     
+
        if (f ==1) {
          if (N== 1) {
            break;
@@ -703,7 +691,7 @@ bool UNO_stage_three () {
          delete_a_card(b, N, idx);
        }
        else if (f == 2) {
-       
+
          add_new_cards(b, N, N+1);
        }
        else if (f==3) {
@@ -722,13 +710,13 @@ bool UNO_stage_three () {
          card_in_round.num = -1;
          delete_a_card(b, N, idx);
        }
-     
+
      }
- 
+
     if (N==0) {
       break;
     }
-    
+
    }
 
    else if (user_move == "pass"){
@@ -736,12 +724,12 @@ bool UNO_stage_three () {
      if (card_in_round.num == -1 ){
        cout << wild_color << endl;
      }
-     
+
      else {
      cout << card_in_round.color << " " << card_in_round.num << "." <<endl;
      }
      add_new_cards(user_cards, n, n+1);
-     
+
 
     if (check_comp_has_drawtwo (b, N, idx) == true && n == 1 ) {
       if (N== 1) {
@@ -753,10 +741,10 @@ bool UNO_stage_three () {
     card_in_round.color = "draw two";
     }
 
-   else {  
+   else {
      int f;
      f = comp_move(b, N, card_in_round, idx, wild_color);
-     
+
      if (f ==1) {
        if (N== 1) {
          break;
@@ -785,12 +773,12 @@ bool UNO_stage_three () {
        delete_a_card(b, N, idx);
      }
 
-  
+
   }
 
    if (N == 0) {
        break;
-   } 
+   }
   }
   else if (user_move != "wild" && user_move != "pass" && user_move != "draw two") {
      if( n==1) {
@@ -813,7 +801,7 @@ bool UNO_stage_three () {
     add_new_cards (user_cards, n, n+2);
     card_in_round.color = "draw two";
     }
- 
+
    else {  int f = comp_move(b, N, card_in_round, idx, wild_color);
 
      if (f ==1) {
@@ -841,7 +829,7 @@ bool UNO_stage_three () {
        if (N== 1) {
          break;
        }
-       
+
        card_in_round.num = -1;
        delete_a_card(b, N, idx);
      }
@@ -850,9 +838,9 @@ bool UNO_stage_three () {
    if (N == 0) {
        break;
    }
-  }  
+  }
 
-  
+
   else if (user_move == "draw two" ) {
     if( n ==1) {
       break;
@@ -876,14 +864,14 @@ bool UNO_stage_three () {
       card_in_round.color = "draw two";
     }
 
-    else { 
+    else {
       int rando = rand()%N;
       delete_a_card(b, N, rando);
       if (b[rando].color == "draw two") {
-      
+
         cout << "Computer plays a " << b[rando].color << "card. You have to pick up two cards now." << endl;
         add_new_cards(user_cards, n, n+2);
-       
+
         card_in_round.color = "draw two";
         card_in_round.num = -2;
       }
@@ -894,59 +882,59 @@ bool UNO_stage_three () {
         if (rand_color == 1) {
         cout << "red.";
         card_in_round.color = "red";
-      
+
         card_in_round.num = -1;
-      
+
         }
       else if (rand_color == 2) {
         cout << "blue.";
         card_in_round.color = "blue";
-      
+
         card_in_round.num = -1;
       }
       else if (rand_color == 3) {
         cout << "green.";
         card_in_round.color = "green";
-     
+
         card_in_round.num = -1;
       }
       else {
         cout << "yellow.";
         card_in_round.color = "yellow";
-      
+
         card_in_round.num = -1;
       }
 
     }
-    
+
     else if (b[rando].color != "draw two" && b[rando].color != "wild") {
 
       cout << "Computer plays a " << b[rando].color << " " << b[rando].num << endl;
       card_in_round.color = b[rando].color;
       card_in_round.num = b[rando].num;
     }
-    
+
 
   }
     if (N == 0) {
        break;
-    }   
+    }
 
    }
-    
+
   }
 
-  
+
   if (n == 0 || n == 1) {
     cout << "you win!" << endl;
-    return 1; 
+    return 1;
     cout << endl;
 
   }
 
   else if (N == 0 || N == 1) {
     cout << "You lose!" << endl;
-    return 0; 
+    return 0;
     cout << endl;
   }
 
@@ -1009,7 +997,7 @@ bool puzzle_collection(int stage, int num){
     break;
     //stage 3
     case 3:
-    cout << "ending uno"<<endl;
+    pass = s3_UNO();
     break;
 
     default:
