@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <ctime>
+#include <iomanip>
 #include "Intro.h"
 using namespace std;
 bool checkforload(string filename){
