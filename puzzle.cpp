@@ -72,8 +72,6 @@ bool s1g1(){
   return 0;
 }
 
-
-
 //stage 2 games:
 //game 1 (tictactoe):
 void displaygrid(char grid[][3]){
@@ -224,9 +222,6 @@ bool s2g1(){
   cout<<"TIED, unable to access door"<<endl;
   return 0;
 }
-
-
-
 
 //UNO game (stage 3)
 struct card {
@@ -956,22 +951,13 @@ bool puzzle_collection(int stage, int num){
   switch (stage){
     //stage 1
     case 1:
-      cout<<"stage 1"<<endl;
       switch (num){
         case 1: //game 1, tictactoe
         pass = s1g1();
         break;
 
         case 2:
-        cout<<"game 2" <<endl;
-        break;
 
-        case 3:
-        cout << "game 3" <<endl;
-        break;
-
-        case 4:
-        cout << "game 4" <<endl;
         break;
 
         default:
@@ -982,7 +968,6 @@ bool puzzle_collection(int stage, int num){
 
     //stage 2
     case 2:
-      cout<<"stage 2"<<endl;
       switch (num){
         case 1: //game 1, number guessing
         pass = s2g1();
@@ -990,14 +975,6 @@ bool puzzle_collection(int stage, int num){
 
         case 2:
         cout<<"game 2" <<endl;
-        break;
-
-        case 3:
-        cout << "game 3" <<endl;
-        break;
-
-        case 4:
-        cout << "game 4" <<endl;
         break;
 
         default:
