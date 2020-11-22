@@ -54,3 +54,6 @@ Eg. save file
 
 7. In-code documentation
 
+#### To run the game
+make Hunt
+./Hunt
